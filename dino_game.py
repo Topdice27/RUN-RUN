@@ -22,22 +22,15 @@ pygame.display.set_caption('Dino Game')
 
 # Load images with error handling
 try:
-    dino_img = pygame.image.load('dino.png').convert_alpha()
-    cactus_img = pygame.image.load('cactus.png').convert_alpha()
+    # Load and scale images
+    dino_img = pygame.transform.scale(pygame.image.load('dino.png').convert_alpha(), (40, 40))
+    cactus_img = pygame.transform.scale(pygame.image.load('cactus.png').convert_alpha(), (30, 30))
 except pygame.error as e:
     print(f"Unable to load image: {e}")
     pygame.quit()
     sys.exit()
 
 # Print statements to check sizes
-print("Original dino size:", dino_img.get_size())
-print("Original cactus size:", cactus_img.get_size())
-
-# Scale images
-dino_img = pygame.transform.scale(dino_img, (40, 40))  # Adjust size as needed
-cactus_img = pygame.transform.scale(cactus_img, (30, 30))  # Adjust size as needed
-
-# Print statements to check scaled sizes
 print("Scaled dino size:", dino_img.get_size())
 print("Scaled cactus size:", cactus_img.get_size())
 
