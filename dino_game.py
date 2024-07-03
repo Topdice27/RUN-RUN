@@ -20,13 +20,26 @@ BLACK = (0, 0, 0)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Dino Game')
 
-# Load images
-dino_img = pygame.image.load('dino.png')
-cactus_img = pygame.image.load('cactus.png')
+# Load images with error handling
+try:
+    dino_img = pygame.image.load('dino.png').convert_alpha()
+    cactus_img = pygame.image.load('cactus.png').convert_alpha()
+except pygame.error as e:
+    print(f"Unable to load image: {e}")
+    pygame.quit()
+    sys.exit()
+
+# Print statements to check sizes
+print("Original dino size:", dino_img.get_size())
+print("Original cactus size:", cactus_img.get_size())
 
 # Scale images
 dino_img = pygame.transform.scale(dino_img, (40, 40))  # Adjust size as needed
 cactus_img = pygame.transform.scale(cactus_img, (30, 30))  # Adjust size as needed
+
+# Print statements to check scaled sizes
+print("Scaled dino size:", dino_img.get_size())
+print("Scaled cactus size:", cactus_img.get_size())
 
 # Game variables
 dino_x = 50
@@ -103,3 +116,4 @@ while running:
     clock.tick(30)
 
 pygame.quit()
+
